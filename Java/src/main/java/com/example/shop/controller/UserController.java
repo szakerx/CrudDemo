@@ -11,21 +11,21 @@ import java.util.List;
 
 @CrossOrigin(origins = "http:localhost:4200")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/")
 public class ShopController {
     @Autowired
     UserRepository repository;
-
+    public ShopController(UserRepository repo){
+        this.repository = repo;
+    }
     @GetMapping("/users")
     public List<User> getAllUsers(){
         System.out.println("Get all Users...");
-
         List<User> users = new ArrayList<>();
         repository.findAll().forEach(users::add);
-
         return users;
     }
-    @PostMapping(value = "/users/create")
+    @GetMapping(value = "/users/create")
     public User postUser(@RequestBody User user){
         User _user = repository.save(new User(user.getFirstname(),user.getLastname()));
         return _user;
