@@ -1,4 +1,4 @@
-package com.shop.dbconn;
+package com.example.shop;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
