@@ -9,32 +9,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin(origins = "http:localhost:4200")
+@CrossOrigin
 @RestController
 @RequestMapping("/")
-public class ShopController {
+public class UserController {
     @Autowired
     UserRepository repository;
-    public ShopController(UserRepository repo){
+    public UserController(UserRepository repo){
         this.repository = repo;
     }
+
     @GetMapping("/users")
-    public List<User> getAllUsers(){
-        System.out.println("Get all Users...");
-        List<User> users = new ArrayList<>();
-        repository.findAll().forEach(users::add);
-        return users;
-    }
-    @GetMapping(value = "/users/create")
-    public User postUser(@RequestBody User user){
-        User _user = repository.save(new User(user.getFirstname(),user.getLastname()));
-        return _user;
+    public List<User> getAllUsers() {
+        return repository.findAll();
     }
 
-    @DeleteMapping("/users/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable("id")long id){
-        System.out.println("Delete User with ID = "+id);
-        repository.deleteById(id);
-        return new ResponseEntity<>("User has been deleted!", HttpStatus.OK);
+    @GetMapping("users/{firstname}")
+    public List<User> getUserByFirstname(@PathVariable("firstname")String firstname){
+        return repository.findByFirstname(firstname);
     }
+
+
+//    @PostMapping(value = "/users/create")
+//    public User postUser(@RequestBody User user){
+//        User _user = repository.save(new User(user.getFirstname(),user.getLastname()));
+//        return _user;
+//    }
+
+//    @DeleteMapping("/users/{id}")
+//    public ResponseEntity<String> deleteUser(@PathVariable("id")long id){
+//        System.out.println("Delete User with ID = "+id);
+//        repository.deleteById(id);
+//        return new ResponseEntity<>("User has been deleted!", HttpStatus.OK);
+//    }
 }

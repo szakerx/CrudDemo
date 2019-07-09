@@ -1,10 +1,10 @@
 package com.example.shop.repo;
 
 import com.example.shop.model.User;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface UserRepository extends CrudRepository<User,Long> {
-    List<User> findByName(String name);
+public interface UserRepository extends JpaRepository<User,Long> {
+    List<User> findByFirstname(String firstname);
 }

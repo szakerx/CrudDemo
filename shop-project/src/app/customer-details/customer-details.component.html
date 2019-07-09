@@ -1,12 +1,5 @@
-<div *ngIf="customer">
-    <div>
-      <label>Name: </label> {{customer.name}}
-    </div>
-    <div>
-      <label>Age: </label> {{customer.age}}
-    </div>
-    <div>
-      <label>Active: </label> {{customer.active}}
-    </div>
-    <hr/>
-  </div>
+<mat-toolbar *ngIf="customer" color="primary">
+  <span>{{customer.id}}</span>
+  <span>{{customer.firstname}}</span>
+  <span>{{customer.lastname}}</span>
+</mat-toolbar>

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
- 
-import { UserService } from '../user.service';
-import { Customer } from '../customer';
+import {Component, NgIterable, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+
+import {UserService} from '../user.service';
+import {Customer} from '../customer';
 
 @Component({
   selector: 'customer-list',
@@ -12,23 +12,14 @@ import { Customer } from '../customer';
 export class CustomerListComponent implements OnInit {
 
   customers: Observable<Customer[]>;
- 
-  constructor(private customerService: UserService) { }
- 
+
+  constructor(private customerService: UserService) {
+  }
+
   ngOnInit() {
     this.reloadData();
   }
- 
-  deleteCustomers() {
-    this.customerService.deleteAll()
-      .subscribe(
-        data => {
-          console.log(data);
-          this.reloadData();
-        },
-        error => console.log('ERROR: ' + error));
-  }
- 
+
   reloadData() {
     this.customers = this.customerService.getCustomersList();
   }
