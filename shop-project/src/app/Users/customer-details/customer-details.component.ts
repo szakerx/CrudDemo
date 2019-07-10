@@ -1,4 +1,4 @@
-import { CustomerListComponent } from './../customer-list/customer-list.component';
+import { CustomerListComponent } from '../customer-list/customer-list.component';
 import { Component, OnInit, Input } from '@angular/core';
 import {Customer} from '../customer';
 import {UserService} from '../user.service';

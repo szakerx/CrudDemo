@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CustomerDetailsComponent } from './customer-details/customer-details.component';
-import { CustomerListComponent } from './customer-list/customer-list.component';
+import { CustomerDetailsComponent } from './Users/customer-details/customer-details.component';
+import { CustomerListComponent } from './Users/customer-list/customer-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
