@@ -17,12 +17,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSortModule} from '@angular/material/sort';
 import {MatInputModule} from '@angular/material';
 import {MatMenuModule} from '@angular/material/menu';
+import { ProductTableComponent } from './Products/product-table/product-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomerDetailsComponent,
     CustomerListComponent,
+    ProductTableComponent,
   ],
   imports: [
     BrowserModule,

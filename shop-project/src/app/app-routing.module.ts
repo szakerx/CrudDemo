@@ -4,7 +4,7 @@ import {CustomerListComponent} from './Users/customer-list/customer-list.compone
 
 
 const routes: Routes = [
-  {path: '', redirectTo: 'customer', pathMatch: 'full'},
+  {path: '', redirectTo: 'users', pathMatch: 'full'},
   {path: 'users', component: CustomerListComponent},
 ];
 
