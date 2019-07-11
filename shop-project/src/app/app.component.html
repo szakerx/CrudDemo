@@ -1,7 +1,19 @@
 <div>
   <nav>
     <mat-toolbar color="primary">
-      <span> NAV </span>
+      <span style="width: 20%;"> NAV </span>
+      <span style="width: 20%;">
+        <a mat-flat-button color="primary" [routerLink]="'users'" routerLinkActive="true">USERS</a>
+      </span>
+      <span style="width: 20%;">
+        <a mat-flat-button color="primary" [routerLink]="'products'" routerLinkActive="true">PRODUCTS</a>
+      </span>
+      <span style="width: 20%;">
+        <a mat-flat-button color="primary" [routerLink]="'suppliers'" routerLinkActive="false">SUPPLIERS</a>
+      </span>
+      <span style="width: 20%;">
+        <a mat-flat-button color="primary" [routerLink]="'logs'" routerLinkActive="false">LOGS</a>
+      </span>
     </mat-toolbar>
   </nav>
   <router-outlet></router-outlet>

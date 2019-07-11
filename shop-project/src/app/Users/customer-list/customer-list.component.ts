@@ -13,7 +13,7 @@ import {MatSort} from '@angular/material/sort';
 export class CustomerListComponent implements OnInit {
 
   customers: Customer[];
-  columnsToDisplay: string[] = ['id', 'firstname', 'lastname'];
+  columnsToDisplay: string[] = ['id', 'firstname', 'lastname', 'edit', 'delete'];
   dataSource: MatTableDataSource<Customer>;
 
 

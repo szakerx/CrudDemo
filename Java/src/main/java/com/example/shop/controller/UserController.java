@@ -28,6 +28,19 @@ public class UserController {
     public List<User> getUserByFirstname(@PathVariable("firstname")String firstname){
         return repository.findByFirstname(firstname);
     }
+    @GetMapping("/checkuser")
+    public boolean checkUserExistance(@RequestParam("login") String login,@RequestParam("pass") String pass){
+        List<User> users = repository.findByLoginAndPass(login,pass);
+        if (users.size() > 0) {
+            System.out.println(users.size());
+            System.out.println("true");
+            return true;
+        } else{
+            System.out.println(users.size());
+            System.out.println("false");
+            return false;
+        }
+    }
 
 
 //    @PostMapping(value = "/users/create")
