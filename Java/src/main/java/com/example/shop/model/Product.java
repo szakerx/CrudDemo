@@ -29,7 +29,7 @@ public class Product {
     @Column(name = "category")
     private String category;
 
-    //Dostarczenie danych z klulcza obcego
+    //Dostarczenie danych z klucza obcego
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "supplier")
     private Supplier supplier;
