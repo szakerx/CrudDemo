@@ -1,16 +1,24 @@
 package com.example.shop.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
 public class Product {
+
+    //Klasy utworzone w package'u model służą do odwzorowania encji z bazy danych
+
     @Id
     @Column(name = "id")
     private int id;
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "type")
+    private String type;
 
     @Column(name = "country")
     private String country;
@@ -21,19 +29,15 @@ public class Product {
     @Column(name = "category")
     private String category;
 
+    //Dostarczenie danych z klulcza obcego
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "supplier")
+    private Supplier supplier;
 
-    @Column(name = "supplier")
-    private int supplierid;
 
     public Product(){}
-    public Product(int id, String name,String country, double count, String category, int supplierid){
-        this.id = id;
-        this.country = country;
-        this.category = category;
-        this.count = count;
-        this.name = name;
-        this.supplierid = supplierid;
-    }
+
+    //Gettery potrzebne do utworzenia json'a
 
     public int getId() {
         return id;
@@ -51,11 +55,19 @@ public class Product {
         return count;
     }
 
-    public int getSupplierid() {
-        return supplierid;
-    }
-
     public String getCategory() {
         return category;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 }

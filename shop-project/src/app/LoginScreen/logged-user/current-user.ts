@@ -1,3 +1,5 @@
+//Klasa zalogowanego usera - będzie zmienane na zgodne z security
+
 export class CurrentUser {
   private static _user: CurrentUser = null;
 

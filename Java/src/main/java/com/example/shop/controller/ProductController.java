@@ -15,11 +15,17 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping("/")
 public class ProductController {
+
+    //Kontroler służy do ustawiania endpointów tak, aby aplikacja z angulara mogła pobierać dane z bazy
+
+    //Wstrzyknięice repozytorium
     @Autowired
     ProductRepository repository;
     public ProductController(ProductRepository repository){
         this.repository=repository;
     }
+
+    //Wybierz wszystkie produkty
     @GetMapping("/products")
     public List<Product> getAllProducts(){
         System.out.println("Get all products");

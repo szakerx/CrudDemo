@@ -23,6 +23,8 @@ import { LoginComponent } from './LoginScreen/login/login.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { LoggedUserComponent } from './LoginScreen/logged-user/logged-user.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { EditProductComponent } from './Products/edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { LoggedUserComponent } from './LoginScreen/logged-user/logged-user.compo
     ProductTableComponent,
     LoginComponent,
     LoggedUserComponent,
+    EditProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,8 @@ import { LoggedUserComponent } from './LoginScreen/logged-user/logged-user.compo
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

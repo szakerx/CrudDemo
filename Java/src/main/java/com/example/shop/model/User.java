@@ -5,6 +5,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users")
 public class User {
+
+    //Klasy utworzone w package'u model służą do odwzorowania encji z bazy danych
+
     @Id
     @Column(name="id")
     private int id;
@@ -28,6 +31,7 @@ public class User {
         this.firstname=firstname;
     }
 
+    //Gettery potrzebne do utworzenia json'a
     public int getId() {
         return id;
     }

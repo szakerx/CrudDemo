@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     this.service.chceckExistance(this.username, this.password).then((data: boolean) => {
       check = data;
       if (check) {
-
+        // Coś z base auth ale jeszcze się uczę
       } else {
         alert('Invalid login or password!');
       }

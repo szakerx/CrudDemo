@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
 public interface LogRepository extends JpaRepository<Log, Long> {
+    //Działanie analogiczne jak w UserRepository
 }

@@ -1,10 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Product} from '../product';
 import {MatTableDataSource} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material';
 import {ProductsService} from '../products.service';
-import {Customer} from '../../Users/customer';
+import {EditProductComponent} from '../edit-product/edit-product.component';
 
 @Component({
   selector: 'app-product-table',
@@ -13,20 +14,26 @@ import {Customer} from '../../Users/customer';
 })
 export class ProductTableComponent implements OnInit {
 
+  // Lista produktów
   products: Product[];
+  // Lista kolumn które ma wyświetlić mat-table
   columnsToDisplay = ['id', 'name', 'type', 'count', 'category', 'supplier', 'country', 'edit', 'delete'];
+  // źródło danych mat-table
   dataSource: MatTableDataSource<Product>;
 
+  // Potrzebne do łączenia komponentów z tabelą danych
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private productService: ProductsService) {
+  // Wstrzyknięcie serwisu produktów do pobrania ich z bazy oraz dialogu aby edytować rekordy (jeszcze nie działa)
+  constructor(private productService: ProductsService, public dialog: MatDialog) {
   }
 
   ngOnInit() {
     this.reloadData();
   }
 
+  // Wczytanie rekordów z bazy i aktualizacja paginatora oraz filtra
   reloadData() {
     this.productService.getAllProducts().subscribe(data => {
       this.products = data;
@@ -36,8 +43,20 @@ export class ProductTableComponent implements OnInit {
     });
   }
 
+  // Filtrowanie mat-table
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  // Funkcja onClick dla buttona edycji
+  editButtonClick() {
+    console.log('edit');
+    const dialogRef = this.dialog.open(EditProductComponent, {
+      height: '400px',
+      width: '600px',
+    });
+
+
   }
 
 }

@@ -7,7 +7,10 @@ import java.util.Date;
 @Entity
 @Table(name = "logs")
 @IdClass(Log.class)
-public class Log implements Serializable {
+public class Log {
+
+    //Klasy utworzone w package'u model służą do odwzorowania encji z bazy danych
+
     @Id
     @Column(name="logtime")
     private Date date;
@@ -24,6 +27,7 @@ public class Log implements Serializable {
         this.userid = userid;
     }
 
+    //Gettery potrzebne do utworzenia json'a
     public Date getDate() {
         return date;
     }

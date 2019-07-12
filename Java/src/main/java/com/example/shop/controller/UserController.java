@@ -13,21 +13,30 @@ import java.util.List;
 @RestController
 @RequestMapping("/")
 public class UserController {
+
+    //Kontroler służy do ustawiania endpointów tak, aby aplikacja z angulara mogła pobierać dane z bazy
+
+    //Wstrzyknięci repozytorium
     @Autowired
     UserRepository repository;
+
     public UserController(UserRepository repo){
         this.repository = repo;
     }
 
+    //Wybierz z bazy wszystkich userów
     @GetMapping("/users")
     public List<User> getAllUsers() {
         return repository.findAll();
     }
 
+    //Wybierz z bazy userów o danym firstname
     @GetMapping("users/{firstname}")
     public List<User> getUserByFirstname(@PathVariable("firstname")String firstname){
         return repository.findByFirstname(firstname);
     }
+
+    //Sprawdź w bazie czy istnieje uzytkownik o danym loginie i hasle
     @GetMapping("/checkuser")
     public boolean checkUserExistance(@RequestParam("login") String login,@RequestParam("pass") String pass){
         List<User> users = repository.findByLoginAndPass(login,pass);

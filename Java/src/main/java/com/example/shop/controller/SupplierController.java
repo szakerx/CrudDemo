@@ -15,6 +15,10 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping("/")
 public class SupplierController {
+
+    //Kontroler służy do ustawiania endpointów tak, aby aplikacja z angulara mogła pobierać dane z bazy
+
+    //Wstrzyknięcie repozytorium
     @Autowired
     SupplierRepository repository;
 
@@ -22,6 +26,7 @@ public class SupplierController {
         this.repository = repository;
     }
 
+    //Wybierz wszystkich dostawców
     @GetMapping("/suppliers")
     public List<Supplier> getAllSuppliers(){
         System.out.println("Get all suppliers");

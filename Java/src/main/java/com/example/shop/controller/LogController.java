@@ -14,6 +14,10 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping("/")
 public class LogController {
+
+    //Kontroler służy do ustawiania endpointów tak, aby aplikacja z angulara mogła pobierać dane z bazy
+
+    //Wstrzyknięcie repozytorium
     @Autowired
     LogRepository repository;
 
@@ -21,6 +25,7 @@ public class LogController {
         this.repository = repository;
     }
 
+    //Pobierz wszystkie logi
     @GetMapping("/logs")
     public List<Log> getAllLogs(){
         System.out.println("Get all logs");

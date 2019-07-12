@@ -1,6 +1,10 @@
+// Klasa odpowiadająca encji z bazy danych
+
+import {Supplier} from '../Suppliers/Supplier';
+
 export class Product {
   constructor(public id?: number, public name?: string, public type?: string,
-              public supplier?: number, public country?: string, public count?: number,
+              public supplier?: Supplier, public country?: string, public count?: number,
               public category?: string) {
     this.id = id;
     this.name = name;
