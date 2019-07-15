@@ -4,12 +4,15 @@
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 </mat-form-field>
 
+<!--Guzik dodania do listy produktów-->
 <button mat-icon-button>
   <mat-icon>add</mat-icon>
 </button>
 
+<!--Tablica zawierająca rekordy z bazy danych-->
 <table mat-table [dataSource]="dataSource" matSort>
 
+<!--Każdy z containerów to jedna kolumna która wyświetla pojedyńczą zawartość encji-->
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
     <td mat-cell *matCellDef="let product">{{product.id}}</td>
@@ -44,6 +47,7 @@
     <td mat-cell *matCellDef="let product">{{product.country}}</td>
   </ng-container>
 
+<!--  Odtąd zaczynają się guziki służące do modyfikacji rekordu lub jego usunięcia-->
   <ng-container matColumnDef="edit">
     <th mat-header-cell *matHeaderCellDef>Edit</th>
     <td mat-cell *matCellDef="let product">
@@ -62,7 +66,9 @@
     </td>
   </ng-container>
 
+<!--  Potrzebne aby tabela wiedziała jakie kolumny ma wyświetlić, pobierana ze zmiennej columnsToDisplay-->
   <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
   <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
 </table>
+<!--Paginator z opcjami wielkości strony-->
 <mat-paginator [pageSizeOptions]="[5,10,25]" showFirstLastButtons></mat-paginator>

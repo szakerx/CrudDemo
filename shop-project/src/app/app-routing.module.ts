@@ -4,7 +4,7 @@ import {CustomerListComponent} from './Users/customer-list/customer-list.compone
 import {ProductTableComponent} from './Products/product-table/product-table.component';
 import {LoginComponent} from './LoginScreen/login/login.component';
 
-
+// Drogi do podmieniania outlet routera w appcomponencie.html
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'users', component: CustomerListComponent},
