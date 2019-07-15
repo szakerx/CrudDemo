@@ -7,7 +7,7 @@ import java.util.Date;
 @Entity
 @Table(name = "logs")
 @IdClass(Log.class)
-public class Log {
+public class Log implements Serializable{
 
     //Klasy utworzone w package'u model służą do odwzorowania encji z bazy danych
 

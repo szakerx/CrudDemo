@@ -8,4 +8,5 @@ public interface UserRepository extends JpaRepository<User,Long> {
     //Klasa służąca do pobrania Userów z bazy danych, wszystkie podstawowe metody zawiera JpaRepostiroy więc nie trzeba ich pisać.
     List<User> findByFirstname(String firstname);
     List<User> findByLoginAndPass(String login, String pass);
+    User findByLogin(String login);
 }

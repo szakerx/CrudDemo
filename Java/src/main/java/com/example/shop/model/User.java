@@ -26,6 +26,10 @@ public class User {
 
     @Column(name="role")
     private String role;
+
+
+    @Column(name="active")
+    private boolean isactive;
     public User(){}
     public void setFirstname(String firstname){
         this.firstname=firstname;
@@ -48,4 +52,5 @@ public class User {
     public String getRole() {
         return role;
     }
+    public boolean isIsactive() { return isactive; }
 }
