@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import {catchError, mapTo, tap} from 'rxjs/operators';
+import {catchError, map, mapTo, tap} from 'rxjs/operators';
 import {Tokens} from '../tokens';
 import {Token} from '../Token';
 
@@ -21,13 +21,31 @@ export class AuthService {
   login(user: { username: string, password: string }): Observable<boolean> {
     return this.http.post<any>(`${this.baseUrl}/login`, user)
       .pipe(
-        tap(token => this.doLoginUser(user.username, token)),
+        tap(token => {
+          this.doLoginUser(user.username, token);
+        }),
         mapTo(true),
         catchError(error => {
-          alert('AAaaaaaa');
+          alert(error.message);
           return of(false);
         }));
   }
+
+  // login(user: { username: string, password: string }): Observable<string> {
+  //   return this.http.post<any>(`${this.baseUrl}/login`, user,
+  //     // {
+  //     //   headers: new HttpHeaders()
+  //     //     .set('Content-Type', 'application/json'),
+  //     //   observe: 'response'
+  //     // }
+  //   ).pipe(map(
+  //     res => {
+  //       const myheader = res.headers.get('Authentication');
+  //       console.log(myheader);
+  //       return myheader;
+  //     }
+  //   ));
+  // }
 
 
   // logout() {
@@ -63,7 +81,7 @@ export class AuthService {
     this.storeTokens(token);
   }
 
-  private doLogoutUser() {
+  public doLogoutUser() {
     this.loggedUser = null;
     this.removeTokens();
   }

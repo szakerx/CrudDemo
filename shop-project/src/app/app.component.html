@@ -1,18 +1,23 @@
 <div>
   <nav>
     <mat-toolbar color="primary">
-      <span style="width: 20%;"> NAV </span>
-      <span style="width: 20%;">
+      <span style="width: 18%;"> NAV </span>
+      <span style="width: 18%;">
         <a mat-flat-button color="primary" [routerLink]="'users'" routerLinkActive="true">USERS</a>
       </span>
-      <span style="width: 20%;">
+      <span style="width: 18%;">
         <a mat-flat-button color="primary" [routerLink]="'products'" routerLinkActive="true">PRODUCTS</a>
       </span>
-      <span style="width: 20%;">
+      <span style="width: 18%;">
         <a mat-flat-button color="primary" [routerLink]="'suppliers'" routerLinkActive="false">SUPPLIERS</a>
       </span>
-      <span style="width: 20%;">
+      <span style="width: 18%;">
         <a mat-flat-button color="primary" [routerLink]="'logs'" routerLinkActive="false">LOGS</a>
+      </span>
+      <span style="width: 10%">
+        <button mat-icon-button (click)="logoutClick()">
+          <mat-icon>logout</mat-icon>
+        </button>
       </span>
     </mat-toolbar>
   </nav>

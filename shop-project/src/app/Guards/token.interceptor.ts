@@ -28,9 +28,10 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   private addToken(request: HttpRequest<any>, token: string) {
+    console.log(token);
     return request.clone({
       setHeaders: {
-        Authorization: `Bearer ${token}`
+        Authorization: `${token.replace('Authorization', '')}`
       }
     });
   }
