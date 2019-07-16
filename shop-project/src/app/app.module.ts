@@ -6,7 +6,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {CustomerDetailsComponent} from './Users/customer-details/customer-details.component';
 import {CustomerListComponent} from './Users/customer-list/customer-list.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -25,6 +25,11 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { LoggedUserComponent } from './LoginScreen/logged-user/logged-user.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { EditProductComponent } from './Products/edit-product/edit-product.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {AuthGuard} from './Guards/auth.guard';
+import {AuthService} from './Guards/auth.service';
+import {GlobalGuard} from './Guards/global.guard';
+import {TokenInterceptor} from './Guards/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -55,9 +60,19 @@ import { EditProductComponent } from './Products/edit-product/edit-product.compo
     MatButtonModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    AuthService,
+    GlobalGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

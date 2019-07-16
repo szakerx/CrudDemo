@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {MatDialog} from '@angular/material';
-import {LoggedUserService} from '../logged-user/logged-user.service';
+import {FormGroup, FormBuilder} from '@angular/forms';
+import {AuthService} from '../../Guards/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,24 +9,36 @@ import {LoggedUserService} from '../logged-user/logged-user.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router, private service: LoggedUserService) {
+  constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) {
   }
 
-  username: string;
-  password: string;
+  loginForm: FormGroup;
 
   ngOnInit() {
-  }
-
-  login(): void {
-    let check: boolean;
-    this.service.chceckExistance(this.username, this.password).then((data: boolean) => {
-      check = data;
-      if (check) {
-        // Coś z base auth ale jeszcze się uczę
-      } else {
-        alert('Invalid login or password!');
-      }
+    this.loginForm = this.formBuilder.group({
+      username: [''],
+      password: ['']
     });
   }
+
+  get f() {
+    return this.loginForm.controls;
+  }
+
+  login() {
+    this.authService.login(
+      {
+        username: this.f.username.value,
+        password: this.f.password.value
+      }
+    )
+      .subscribe(success => {
+        if (success) {
+          this.router.navigate(['products']);
+        } else {
+          console.log('Subscribe false');
+        }
+      });
+  }
+
 }
