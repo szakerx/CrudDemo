@@ -1,24 +1,31 @@
 <div>
-  <nav>
+  <nav *ngIf="this.authService.isLoggedIn()">
     <mat-toolbar color="primary">
+
       <span style="width: 18%;"> NAV </span>
-      <span style="width: 18%;">
-        <a mat-flat-button color="primary" [routerLink]="'users'" routerLinkActive="true">USERS</a>
-      </span>
-      <span style="width: 18%;">
+
+      <span style="width: 18%;" *ngIf="this.authService.isLoggedIn()">
         <a mat-flat-button color="primary" [routerLink]="'products'" routerLinkActive="true">PRODUCTS</a>
       </span>
-      <span style="width: 18%;">
+
+      <span style="width: 18%;" *ngIf="this.authService.isLoggedIn() && this.authService.getRole()=='admin'">
+        <a mat-flat-button color="primary" [routerLink]="'users'" routerLinkActive="true">USERS</a>
+      </span>
+
+      <span style="width: 18%;" *ngIf="this.authService.isLoggedIn()">
         <a mat-flat-button color="primary" [routerLink]="'suppliers'" routerLinkActive="false">SUPPLIERS</a>
       </span>
+
       <span style="width: 18%;">
         <a mat-flat-button color="primary" [routerLink]="'logs'" routerLinkActive="false">LOGS</a>
       </span>
-      <span style="width: 10%">
+
+      <span style="width: 10%" *ngIf="this.authService.isLoggedIn()">
         <button mat-icon-button (click)="logoutClick()">
           <mat-icon>logout</mat-icon>
         </button>
       </span>
+
     </mat-toolbar>
   </nav>
   <router-outlet></router-outlet>

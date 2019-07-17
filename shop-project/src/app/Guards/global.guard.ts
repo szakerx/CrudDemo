@@ -5,17 +5,13 @@ import {Injectable} from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class GlobalGuard implements CanActivate, CanLoad {
+export class GlobalGuard implements CanActivate{
 
   constructor(private  authService: AuthService, private router: Router) {
   }
 
   canActivate() {
-    return this.canLoad();
-  }
-
-  canLoad() {
-    if (this.authService.isLoggedIn()) {
+    if (!this.authService.isLoggedIn()) {
       this.router.navigate(['login']);
     }
     return this.authService.isLoggedIn();

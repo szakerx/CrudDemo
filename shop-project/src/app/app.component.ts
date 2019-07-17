@@ -12,5 +12,6 @@ export class AppComponent {
   }
   logoutClick() {
     this.authService.doLogoutUser();
+    window.location.reload();
   }
 }

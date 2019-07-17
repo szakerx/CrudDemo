@@ -7,8 +7,8 @@ import { catchError, filter, take, switchMap } from 'rxjs/operators';
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-  private isRefreshing = false;
-  private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  // private isRefreshing = false;
+  // private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   constructor(public authService: AuthService) { }
 
@@ -28,7 +28,6 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   private addToken(request: HttpRequest<any>, token: string) {
-    console.log(token);
     return request.clone({
       setHeaders: {
         Authorization: `${token.replace('Authorization', '')}`

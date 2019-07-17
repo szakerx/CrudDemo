@@ -2,8 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError, map, mapTo, tap} from 'rxjs/operators';
-import {Tokens} from '../tokens';
-import {Token} from '../Token';
+import {Token} from './Token';
 
 @Injectable({
   providedIn: 'root'
@@ -76,12 +75,16 @@ export class AuthService {
     return localStorage.getItem(this.JWT_TOKEN);
   }
 
+  getRole() {
+    return localStorage.getItem('ROLE');
+  }
+
   private doLoginUser(username: string, token: Token) {
     this.loggedUser = username;
     this.storeTokens(token);
   }
 
-  public doLogoutUser() {
+  doLogoutUser() {
     this.loggedUser = null;
     this.removeTokens();
   }
@@ -96,7 +99,7 @@ export class AuthService {
 
   private storeTokens(token: Token) {
     localStorage.setItem(this.JWT_TOKEN, token.jwt);
-    // localStorage.setItem(this.REFRESH_TOKEN, tokens.refreshToken);
+    localStorage.setItem('ROLE', token.role);
   }
 
   private removeTokens() {

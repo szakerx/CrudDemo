@@ -1,11 +1,17 @@
 package com.example.shop.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.example.shop.model.Enums.Category;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
+@TypeDef(
+        name = "pgsql_enum",
+        typeClass = PostgreSQLEnumType.class
+)
 public class Product {
 
     //Klasy utworzone w package'u model służą do odwzorowania encji z bazy danych
@@ -17,8 +23,10 @@ public class Product {
     @Column(name = "name")
     private String name;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "type")
-    private String type;
+    @Type(type = "pgsql_enum")
+    private com.example.shop.model.Enums.Type type;
 
     @Column(name = "country")
     private String country;
@@ -26,8 +34,10 @@ public class Product {
     @Column(name = "count")
     private double count;
 
+    @Enumerated(EnumType.STRING)
+    @Type(type = "pgsql_enum")
     @Column(name = "category")
-    private String category;
+    private Category category;
 
     //Dostarczenie danych z klucza obcego
     @ManyToOne(fetch = FetchType.EAGER)
@@ -55,11 +65,11 @@ public class Product {
         return count;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public String getType() {
+    public com.example.shop.model.Enums.Type getType() {
         return type;
     }
 

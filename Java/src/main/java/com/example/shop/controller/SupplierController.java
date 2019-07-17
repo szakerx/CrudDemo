@@ -1,6 +1,7 @@
 package com.example.shop.controller;
 
 import com.example.shop.model.Supplier;
+import com.example.shop.model.ViewModels.SupplierName;
 import com.example.shop.repo.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -33,5 +34,16 @@ public class SupplierController {
         List<Supplier> suppliers = new ArrayList<>();
         repository.findAll().forEach(suppliers::add);
         return  suppliers;
+    }
+
+    @GetMapping("/suppliers/names")
+    public List<String> getAllSuppliersNames(){
+        List<String> suppliersNames = new ArrayList<>();
+        List<Supplier> suppliers = new ArrayList<>();
+        repository.findAll().forEach(suppliers::add);
+        suppliers.forEach(supplier -> {
+            suppliersNames.add(supplier.getName());
+        });
+        return suppliersNames;
     }
 }

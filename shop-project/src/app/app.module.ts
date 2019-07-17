@@ -19,17 +19,18 @@ import {MatIconModule, MatInputModule} from '@angular/material';
 import {MatMenuModule} from '@angular/material/menu';
 import {ProductTableComponent} from './Products/product-table/product-table.component';
 import {MatButtonModule} from '@angular/material/button';
-import { LoginComponent } from './LoginScreen/login/login.component';
+import {LoginComponent} from './LoginScreen/login/login.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { LoggedUserComponent } from './LoginScreen/logged-user/logged-user.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import { EditProductComponent } from './Products/edit-product/edit-product.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AuthGuard} from './Guards/auth.guard';
 import {AuthService} from './Guards/auth.service';
 import {GlobalGuard} from './Guards/global.guard';
 import {TokenInterceptor} from './Guards/token.interceptor';
+import {A11yModule} from '@angular/cdk/a11y';
+import {ProductWindowComponent} from './Products/product-window/product-window.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -38,8 +39,10 @@ import {TokenInterceptor} from './Guards/token.interceptor';
     CustomerListComponent,
     ProductTableComponent,
     LoginComponent,
-    LoggedUserComponent,
-    EditProductComponent,
+    ProductWindowComponent
+  ],
+  entryComponents: [
+    ProductWindowComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,9 @@ import {TokenInterceptor} from './Guards/token.interceptor';
     MatCardModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    A11yModule,
+    MatSelectModule
   ],
   providers: [
     AuthGuard,

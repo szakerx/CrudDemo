@@ -57,4 +57,8 @@ public class UserPrincipal implements UserDetails {
     public boolean isEnabled() {
         return this.user.isIsactive();
     }
+
+    public String getUserRole(){
+        return this.user.getRole();
+    }
 }

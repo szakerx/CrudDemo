@@ -1,0 +1,58 @@
+<h1 mat-dialog-title>Product</h1>
+<div mat-dialog-content>
+  <div class="row">
+    <div class="column">
+
+      <p>Name</p>
+      <mat-form-field>
+        <input matInput [(ngModel)]="product.name">
+      </mat-form-field>
+
+      <p>Count</p>
+      <mat-form-field>
+        <input matInput type="number" [(ngModel)]="product.count">
+      </mat-form-field>
+
+      <p>Supplier</p>
+      <mat-form-field>
+        <mat-select [(value)]="product.supplier.name">
+          <mat-option *ngFor="let supplier of suppliers" [value]="supplier">
+            {{supplier}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+    <div class="column">
+
+      <p>Type</p>
+      <mat-form-field>
+        <mat-select [(value)]="product.type">
+          <mat-option *ngFor="let type of types" [value]="type">
+            {{type}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <p>Category</p>
+      <mat-form-field>
+        <mat-select [(value)]="product.category">
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{category}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <p>Country</p>
+      <mat-form-field>
+        <input matInput [(ngModel)]="product.country">
+      </mat-form-field>
+
+
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancelClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="getProductBack()" cdkFocusInitial>OK</button>
+</div>

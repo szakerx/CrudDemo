@@ -60,6 +60,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET.getBytes()));
         response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + token);
         ReturnJson jsa = new ReturnJson();
+        jsa.setRole(principal.getUserRole());
         jsa.setJwt(JwtProperties.HEADER_STRING + JwtProperties.TOKEN_PREFIX + token);
         String gogoJson = new Gson().toJson(jsa);
         PrintWriter out = response.getWriter();

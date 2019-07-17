@@ -17,4 +17,21 @@ export class ProductsService {
   public getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.baseUrl);
   }
+  // Pobierz z bazy wszystkie typy produktow
+  public getAllTypes(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.baseUrl}/enums/types`);
+  }
+
+  // Pobierz z bazy wszystkie kategorie produktow
+  public getAllCategories(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.baseUrl}/enums/categories`);
+  }
+
+  public getAllSupplierNames(): Observable<string[]> {
+    return this.http.get<string[]>('http://localhost:8080/suppliers/names');
+  }
+
+  public addProduct(product: Product): Observable<Product> {
+    return this.http.post<Product>(`${this.baseUrl}/add`, product);
+  }
 }

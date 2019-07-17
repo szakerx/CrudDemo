@@ -36,21 +36,6 @@ public class UserController {
         return repository.findByFirstname(firstname);
     }
 
-    //Sprawdź w bazie czy istnieje uzytkownik o danym loginie i hasle
-    @GetMapping("/checkuser")
-    public boolean checkUserExistance(@RequestParam("login") String login,@RequestParam("pass") String pass){
-        List<User> users = repository.findByLoginAndPass(login,pass);
-        if (users.size() > 0) {
-            System.out.println(users.size());
-            System.out.println("true");
-            return true;
-        } else{
-            System.out.println(users.size());
-            System.out.println("false");
-            return false;
-        }
-    }
-
 
 //    @PostMapping(value = "/users/create")
 //    public User postUser(@RequestBody User user){

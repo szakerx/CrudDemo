@@ -10,8 +10,8 @@ import {GlobalGuard} from './Guards/global.guard';
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
-  {path: 'users', component: CustomerListComponent, canLoad: [GlobalGuard]},
-  {path: 'products', component: ProductTableComponent, canLoad: [GlobalGuard]}
+  {path: 'users', component: CustomerListComponent, canActivate: [GlobalGuard]},
+  {path: 'products', component: ProductTableComponent, canActivate: [GlobalGuard]}
 ];
 
 @NgModule({

@@ -5,7 +5,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material';
 import {ProductsService} from '../products.service';
-import {EditProductComponent} from '../edit-product/edit-product.component';
+import {AuthService} from '../../Guards/auth.service';
+import {ProductWindowComponent} from '../product-window/product-window.component';
 
 @Component({
   selector: 'app-product-table',
@@ -26,7 +27,7 @@ export class ProductTableComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   // Wstrzyknięcie serwisu produktów do pobrania ich z bazy oraz dialogu aby edytować rekordy (jeszcze nie działa)
-  constructor(private productService: ProductsService, public dialog: MatDialog) {
+  constructor(private productService: ProductsService, public dialog: MatDialog, private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -48,15 +49,27 @@ export class ProductTableComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  // Funkcja onClick dla buttona edycji
-  editButtonClick() {
-    console.log('edit');
-    const dialogRef = this.dialog.open(EditProductComponent, {
-      height: '400px',
-      width: '600px',
+  editButtonClick(index: number) {
+    const dialogRef = this.dialog.open(ProductWindowComponent, {
+      width: '800px',
+      data: this.products[index]
     });
 
-
+    dialogRef.afterClosed().subscribe(() => {
+      this.reloadData();
+    });
   }
 
+  addButtonClick() {
+    const dialogRef = this.dialog.open(ProductWindowComponent, {
+      width: '800px',
+      data: new Product()
+    });
+
+    dialogRef.afterClosed().subscribe(product => {
+      this.productService.addProduct(product).subscribe(data => {
+        console.log(data);
+      });
+    });
+  }
 }
