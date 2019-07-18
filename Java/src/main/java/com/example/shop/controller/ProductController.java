@@ -10,11 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.shop.model.Enums.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.EnumSet;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -33,14 +30,13 @@ public class ProductController {
     //Wybierz wszystkie produkty
     @GetMapping("/products")
     public List<Product> getAllProducts(){
-        System.out.println("Get all products");
         List<Product> products = new ArrayList<>();
         repository.findAll().forEach(products::add);
         return products;
     }
 
-    @DeleteMapping("/products/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable("id")long id){
+    @DeleteMapping("/products/delete/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable("id") Long id){
         System.out.println("Delete Product with ID = " + id);
         repository.deleteById(id);
         return new ResponseEntity<>("User has been deleted!", HttpStatus.OK);
@@ -54,12 +50,22 @@ public class ProductController {
         return _product;
     }
 
+    @PutMapping("products/update/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public ResponseEntity<Product> updateProduct(@PathVariable("id") Long id,
+                                 @RequestBody Product product) {
+        Optional<Product> _product = repository.findById(id);
+        if(_product.isPresent()) {
+            System.out.println("Updating...");
+            return new ResponseEntity<>(repository.save(product),HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
     @GetMapping("/products/enums/types")
     public String[] getTypes() {
         Type[] types = Type.values();
         String[] names = new String[types.length];
-
-        System.out.println("typy");
         for (int i = 0; i < types.length; i++) {
             names[i] = types[i].name();
         }
@@ -70,8 +76,6 @@ public class ProductController {
     public String[] getCategories() {
         Category[] categories = Category.values();
         String[] names = new String[categories.length];
-
-        System.out.println("kategorie");
         for (int i = 0; i < categories.length; i++) {
             names[i] = categories[i].name();
         }

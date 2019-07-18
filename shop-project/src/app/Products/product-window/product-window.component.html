@@ -5,19 +5,19 @@
 
       <p>Name</p>
       <mat-form-field>
-        <input matInput [(ngModel)]="product.name">
+        <input matInput [(ngModel)]="this.product.name">
       </mat-form-field>
 
       <p>Count</p>
       <mat-form-field>
-        <input matInput type="number" [(ngModel)]="product.count">
+        <input matInput type="number" [(ngModel)]="this.product.count">
       </mat-form-field>
 
       <p>Supplier</p>
       <mat-form-field>
-        <mat-select [(value)]="product.supplier.name">
-          <mat-option *ngFor="let supplier of suppliers" [value]="supplier">
-            {{supplier}}
+        <mat-select [(value)]="this.product.supplier.id">
+          <mat-option *ngFor="let supplier of suppliers" [value]="supplier.id">
+            {{supplier.name}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -27,7 +27,7 @@
 
       <p>Type</p>
       <mat-form-field>
-        <mat-select [(value)]="product.type">
+        <mat-select [(value)]="this.product.type">
           <mat-option *ngFor="let type of types" [value]="type">
             {{type}}
           </mat-option>
@@ -36,7 +36,7 @@
 
       <p>Category</p>
       <mat-form-field>
-        <mat-select [(value)]="product.category">
+        <mat-select [(value)]="this.product.category">
           <mat-option *ngFor="let category of categories" [value]="category">
             {{category}}
           </mat-option>
@@ -45,7 +45,7 @@
 
       <p>Country</p>
       <mat-form-field>
-        <input matInput [(ngModel)]="product.country">
+        <input matInput [(ngModel)]="this.product.country">
       </mat-form-field>
 
 
@@ -54,5 +54,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="cancelClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="getProductBack()" cdkFocusInitial>OK</button>
+  <button mat-button [mat-dialog-close]="this.product">OK</button>
 </div>

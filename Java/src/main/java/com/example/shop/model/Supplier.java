@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.nio.MappedByteBuffer;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "suppliers")
@@ -24,12 +25,12 @@ public class Supplier {
     private String nip;
 
     //Stworzenie adnotacji o kluczu obcym w innej tablicy
-    @OneToMany(mappedBy = "supplier",fetch = FetchType.EAGER)
-    private List<Product> products;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "supplier")
+    private Set<Product> products;
 
     public Supplier(){}
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(Set<Product> products) {
         this.products = products;
     }
 

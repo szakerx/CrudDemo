@@ -31,6 +31,7 @@ import {TokenInterceptor} from './Guards/token.interceptor';
 import {A11yModule} from '@angular/cdk/a11y';
 import {ProductWindowComponent} from './Products/product-window/product-window.component';
 import {MatSelectModule} from '@angular/material/select';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -39,10 +40,12 @@ import {MatSelectModule} from '@angular/material/select';
     CustomerListComponent,
     ProductTableComponent,
     LoginComponent,
-    ProductWindowComponent
+    ProductWindowComponent,
+    ConfirmDialogComponent
   ],
   entryComponents: [
-    ProductWindowComponent
+    ProductWindowComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,

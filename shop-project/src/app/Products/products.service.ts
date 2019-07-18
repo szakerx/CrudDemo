@@ -17,6 +17,7 @@ export class ProductsService {
   public getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.baseUrl);
   }
+
   // Pobierz z bazy wszystkie typy produktow
   public getAllTypes(): Observable<string[]> {
     return this.http.get<string[]>(`${this.baseUrl}/enums/types`);
@@ -27,11 +28,16 @@ export class ProductsService {
     return this.http.get<string[]>(`${this.baseUrl}/enums/categories`);
   }
 
-  public getAllSupplierNames(): Observable<string[]> {
-    return this.http.get<string[]>('http://localhost:8080/suppliers/names');
-  }
-
   public addProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(`${this.baseUrl}/add`, product);
+  }
+
+  public updateProduct(product: Product): Observable<Product> {
+    console.log('Update product: ' + product);
+    return this.http.put<Product>(`${this.baseUrl}/update/${product.id}`, product);
+  }
+
+  public deleteProduct(product: Product): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/delete/${product.id}`, {responseType: 'text'});
   }
 }

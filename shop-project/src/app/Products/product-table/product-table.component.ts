@@ -7,6 +7,7 @@ import {MatSort} from '@angular/material';
 import {ProductsService} from '../products.service';
 import {AuthService} from '../../Guards/auth.service';
 import {ProductWindowComponent} from '../product-window/product-window.component';
+import {ConfirmDialogComponent} from '../../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-product-table',
@@ -55,8 +56,13 @@ export class ProductTableComponent implements OnInit {
       data: this.products[index]
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-      this.reloadData();
+    dialogRef.afterClosed().subscribe(product => {
+      if (product) {
+        this.productService.updateProduct(product).subscribe(data => {
+          console.log('After closed second subscribe: ' + data);
+          this.reloadData();
+        });
+      }
     });
   }
 
@@ -67,9 +73,27 @@ export class ProductTableComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(product => {
+      product.id = -1;
       this.productService.addProduct(product).subscribe(data => {
         console.log(data);
+        this.reloadData();
       });
+    });
+  }
+
+  deleteButtonClick(index: number) {
+    const dialogConfirm = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: this.products[index]
+    });
+
+    dialogConfirm.afterClosed().subscribe(confirm => {
+      if (confirm) {
+        this.productService.deleteProduct(this.products[index]).subscribe(info => {
+          console.log(info);
+          this.reloadData();
+        });
+      }
     });
   }
 }

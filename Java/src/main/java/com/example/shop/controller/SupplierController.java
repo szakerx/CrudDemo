@@ -30,20 +30,8 @@ public class SupplierController {
     //Wybierz wszystkich dostawców
     @GetMapping("/suppliers")
     public List<Supplier> getAllSuppliers(){
-        System.out.println("Get all suppliers");
         List<Supplier> suppliers = new ArrayList<>();
         repository.findAll().forEach(suppliers::add);
         return  suppliers;
-    }
-
-    @GetMapping("/suppliers/names")
-    public List<String> getAllSuppliersNames(){
-        List<String> suppliersNames = new ArrayList<>();
-        List<Supplier> suppliers = new ArrayList<>();
-        repository.findAll().forEach(suppliers::add);
-        suppliers.forEach(supplier -> {
-            suppliersNames.add(supplier.getName());
-        });
-        return suppliersNames;
     }
 }

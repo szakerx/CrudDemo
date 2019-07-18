@@ -18,7 +18,8 @@ public class Product {
 
     @Id
     @Column(name = "id")
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -40,16 +41,15 @@ public class Product {
     private Category category;
 
     //Dostarczenie danych z klucza obcego
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "supplier")
     private Supplier supplier;
-
 
     public Product(){}
 
     //Gettery potrzebne do utworzenia json'a
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
