@@ -1,6 +1,7 @@
 package com.example.shop.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -18,6 +19,10 @@ public class Supplier {
     @Column(name="id")
     private int id;
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Column(name="name")
     private String name;
 
@@ -26,11 +31,11 @@ public class Supplier {
 
     //Stworzenie adnotacji o kluczu obcym w innej tablicy
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "supplier")
-    private Set<Product> products;
+    private List<Product> products;
 
     public Supplier(){}
 
-    public void setProducts(Set<Product> products) {
+    public void setProducts(List<Product> products) {
         this.products = products;
     }
 

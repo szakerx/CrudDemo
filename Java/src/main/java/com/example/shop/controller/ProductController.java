@@ -1,5 +1,6 @@
 package com.example.shop.controller;
 
+import com.example.shop.controller.filters.ProductFilter;
 import com.example.shop.model.Enums.Category;
 import com.example.shop.model.Product;
 import com.example.shop.repo.ProductRepository;
@@ -9,9 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.shop.model.Enums.Type;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+
+import java.util.*;
 
 @RestController
 @CrossOrigin
@@ -80,5 +80,17 @@ public class ProductController {
             names[i] = categories[i].name();
         }
         return names;
+    }
+
+    @PostMapping("/products/myquery")
+    public List<Product> myQuery(@RequestBody ProductFilter productFilter) {
+        productFilter.checkValues();
+        List<Product> products = new ArrayList<>();
+        Set<String> suppliers = new HashSet<>();
+        Set<String> countries = new HashSet<>();
+        suppliers.add(productFilter.getSupplier());
+        countries.add(productFilter.getCountry());
+        repository.findProductBySupplierNameAndCountry(productFilter.getSupplier(),productFilter.getCountry()).forEach(products::add);
+        return products;
     }
 }

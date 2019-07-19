@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Product} from './product';
+import {ProductFilter} from './product-filter';
 
 @Injectable({
   providedIn: 'root'
@@ -33,11 +34,18 @@ export class ProductsService {
   }
 
   public updateProduct(product: Product): Observable<Product> {
-    console.log('Update product: ' + product);
     return this.http.put<Product>(`${this.baseUrl}/update/${product.id}`, product);
   }
 
   public deleteProduct(product: Product): Observable<any> {
     return this.http.delete(`${this.baseUrl}/delete/${product.id}`, {responseType: 'text'});
+  }
+
+  public filterProducts(filter: ProductFilter): Observable<Product[]> {
+    return this.http.post<Product[]>(`${this.baseUrl}/myquery`, filter);
+  }
+
+  public getCountries(): Observable<string[]> {
+    return this.http.get<string[]>('http://localhost:8080/countries');
   }
 }

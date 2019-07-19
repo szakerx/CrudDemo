@@ -8,6 +8,9 @@ import {ProductsService} from '../products.service';
 import {AuthService} from '../../Guards/auth.service';
 import {ProductWindowComponent} from '../product-window/product-window.component';
 import {ConfirmDialogComponent} from '../../confirm-dialog/confirm-dialog.component';
+import {ProductFilter} from '../product-filter';
+import {Supplier} from '../../Suppliers/Supplier';
+import {SupplierService} from '../../Suppliers/supplier.service';
 
 @Component({
   selector: 'app-product-table',
@@ -22,17 +25,23 @@ export class ProductTableComponent implements OnInit {
   columnsToDisplay = ['id', 'name', 'type', 'count', 'category', 'supplier', 'country', 'edit', 'delete'];
   // źródło danych mat-table
   dataSource: MatTableDataSource<Product>;
+  filter: ProductFilter = new ProductFilter();
 
   // Potrzebne do łączenia komponentów z tabelą danych
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
+  suppliers: Supplier[];
+  countries: string[];
+
   // Wstrzyknięcie serwisu produktów do pobrania ich z bazy oraz dialogu aby edytować rekordy (jeszcze nie działa)
-  constructor(private productService: ProductsService, public dialog: MatDialog, private authService: AuthService) {
+  constructor(private productService: ProductsService, public dialog: MatDialog,
+              private authService: AuthService, private supplierService: SupplierService) {
   }
 
   ngOnInit() {
     this.reloadData();
+    this.loadSelects();
   }
 
   // Wczytanie rekordów z bazy i aktualizacja paginatora oraz filtra
@@ -94,6 +103,25 @@ export class ProductTableComponent implements OnInit {
           this.reloadData();
         });
       }
+    });
+  }
+
+  loadSelects() {
+    this.supplierService.getAllSuppliers().subscribe(data => {
+      this.suppliers = data;
+    });
+
+    this.productService.getCountries().subscribe(data => {
+      this.countries = data;
+    });
+  }
+
+  doFilter() {
+    this.productService.filterProducts(this.filter).subscribe(data => {
+      this.products = data;
+      this.dataSource = new MatTableDataSource<Product>(this.products);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
 }

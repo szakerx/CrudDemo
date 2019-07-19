@@ -1,8 +1,8 @@
 package com.example.shop.repo;
 
-import com.example.shop.model.Log;
+import com.example.shop.model.Country;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface LogRepository extends JpaRepository<Log, Long> {
+public interface CountryRepository extends JpaRepository<Country, Long> {
     //Działanie analogiczne jak w UserRepository
 }

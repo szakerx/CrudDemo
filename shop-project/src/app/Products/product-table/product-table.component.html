@@ -4,6 +4,35 @@
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 </mat-form-field>
 
+<!-- FILTROWANIE -->
+<div>
+
+  <p>Name</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="this.filter.Name">
+  </mat-form-field>
+
+  <p>Supplier</p>
+  <mat-form-field>
+    <mat-select [(value)]="this.filter.Supplier">
+      <mat-option *ngFor="let supplier of suppliers" [value]="supplier.id">
+        {{supplier.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <p>Country</p>
+  <mat-form-field>
+    <mat-select [(value)]="this.filter.Country">
+      <mat-option *ngFor="let country of countries" [value]="country">
+        {{country}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-button (click)="doFilter()">FILTER</button>
+</div>
+
 <!--Guzik dodania do listy produktów-->
 <button mat-icon-button (click)="addButtonClick()">
   <mat-icon>add</mat-icon>
@@ -12,7 +41,7 @@
 <!--Tablica zawierająca rekordy z bazy danych-->
 <table mat-table [dataSource]="dataSource" matSort>
 
-<!--Każdy z containerów to jedna kolumna która wyświetla pojedyńczą zawartość encji-->
+  <!--Każdy z containerów to jedna kolumna która wyświetla pojedyńczą zawartość encji-->
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
     <td mat-cell *matCellDef="let product">{{product.id}}</td>
@@ -47,7 +76,7 @@
     <td mat-cell *matCellDef="let product">{{product.country}}</td>
   </ng-container>
 
-<!--  Odtąd zaczynają się guziki służące do modyfikacji rekordu lub jego usunięcia-->
+  <!--  Odtąd zaczynają się guziki służące do modyfikacji rekordu lub jego usunięcia-->
   <ng-container matColumnDef="edit">
     <th mat-header-cell *matHeaderCellDef>Edit</th>
     <td mat-cell *matCellDef="let product">
@@ -58,15 +87,18 @@
   </ng-container>
 
   <ng-container matColumnDef="delete">
-    <th mat-header-cell *matHeaderCellDef><div *ngIf="this.authService.getRole()=='admin'">Delete</div></th>
+    <th mat-header-cell *matHeaderCellDef>
+      <div *ngIf="this.authService.getRole()=='admin'">Delete</div>
+    </th>
     <td mat-cell *matCellDef="let product">
-      <button mat-icon-button (click)="deleteButtonClick(dataSource.data.indexOf(product))" *ngIf="this.authService.getRole()=='admin'">
+      <button mat-icon-button (click)="deleteButtonClick(dataSource.data.indexOf(product))"
+              *ngIf="this.authService.getRole()=='admin'">
         <mat-icon color="warn">delete</mat-icon>
       </button>
     </td>
   </ng-container>
 
-<!--  Potrzebne aby tabela wiedziała jakie kolumny ma wyświetlić, pobierana ze zmiennej columnsToDisplay-->
+  <!--  Potrzebne aby tabela wiedziała jakie kolumny ma wyświetlić, pobierana ze zmiennej columnsToDisplay-->
   <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
   <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
 </table>
