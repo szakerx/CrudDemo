@@ -1,4 +1,4 @@
-<mat-label>Customers</mat-label>
+<h1 mat-dialog-title>Customers</h1>
 <br>
 <mat-form-field>
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
@@ -20,6 +20,32 @@
   <ng-container matColumnDef="lastname">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Last name</th>
     <td mat-cell *matCellDef="let user">{{user.lastname}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="login">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Login</th>
+    <td mat-cell *matCellDef="let user">{{user.login}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="role">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+    <td mat-cell *matCellDef="let user">{{user.role}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="isactive">
+    <th mat-header-cell *matHeaderCellDef>Is Active</th>
+    <td mat-cell *matCellDef="let user">
+      <ng-template #niedziala>
+        <button (click)="changeState(customers[dataSource.data.indexOf(user)])" mat-icon-button>
+          <mat-icon color="warn">indeterminate_check_box</mat-icon>
+        </button>
+      </ng-template>
+      <div *ngIf="user.active; else niedziala">
+        <button mat-icon-button (click)="changeState(customers[dataSource.data.indexOf(user)])">
+          <mat-icon>check_box</mat-icon>
+        </button>
+      </div>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="edit">

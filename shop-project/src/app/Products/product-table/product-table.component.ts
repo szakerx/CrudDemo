@@ -33,6 +33,8 @@ export class ProductTableComponent implements OnInit {
 
   suppliers: Supplier[];
   countries: string[];
+  types: string[];
+  categories: string[];
 
   // Wstrzyknięcie serwisu produktów do pobrania ich z bazy oraz dialogu aby edytować rekordy (jeszcze nie działa)
   constructor(private productService: ProductsService, public dialog: MatDialog,
@@ -113,6 +115,14 @@ export class ProductTableComponent implements OnInit {
 
     this.productService.getCountries().subscribe(data => {
       this.countries = data;
+    });
+
+    this.productService.getAllTypes().subscribe(data => {
+      this.types = data;
+    });
+
+    this.productService.getAllCategories().subscribe(data => {
+      this.categories = data;
     });
   }
 

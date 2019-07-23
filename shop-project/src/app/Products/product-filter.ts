@@ -1,17 +1,11 @@
-import {Supplier} from '../Suppliers/Supplier';
 
 export class ProductFilter {
-  constructor(private name: string = '', private supplier: string = '', private country: string = '') {
-    this.name = name;
+  constructor(private supplier: string = '', private country: string = '',
+              private type: string = '', private category: string = '') {
     this.supplier = supplier;
     this.country = country;
-  }
-
-  get Name(): string {
-    return this.name;
-  }
-  set Name(value: string) {
-    this.name = value;
+    this.type = type;
+    this.category = category;
   }
 
   public get Supplier() {
@@ -26,5 +20,19 @@ export class ProductFilter {
   }
   public set Country(value: string) {
     this.country = value;
+  }
+
+  public get Type() {
+    return this.type;
+  }
+  public set Type(value: string) {
+    this.type = value;
+  }
+
+  public get Category() {
+    return this.category;
+  }
+  public set Category(value: string) {
+    this.category = value;
   }
 }

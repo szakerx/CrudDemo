@@ -1,36 +1,61 @@
 <h1 mat-dialog-title>Products</h1>
-<br>
-<mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-</mat-form-field>
 
 <!-- FILTROWANIE -->
-<div>
+<div class="filterContainer">
 
-  <p>Name</p>
-  <mat-form-field>
-    <input matInput [(ngModel)]="this.filter.Name">
-  </mat-form-field>
+  <div class="Component">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
 
-  <p>Supplier</p>
-  <mat-form-field>
-    <mat-select [(value)]="this.filter.Supplier">
-      <mat-option *ngFor="let supplier of suppliers" [value]="supplier.id">
-        {{supplier.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+  <div class="Component">
+    <mat-form-field>
+      <mat-select [(value)]="this.filter.Supplier" placeholder="Supplier">
+        <mat-option [value]=''></mat-option>
+        <mat-option *ngFor="let supplier of suppliers" [value]="supplier.name">
+          {{supplier.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-  <p>Country</p>
-  <mat-form-field>
-    <mat-select [(value)]="this.filter.Country">
-      <mat-option *ngFor="let country of countries" [value]="country">
-        {{country}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+  <div class="Component">
+    <mat-form-field>
+      <mat-select [(value)]="this.filter.Country" placeholder="Country">
+        <mat-option [value]=''></mat-option>
+        <mat-option *ngFor="let country of countries" [value]="country">
+          {{country}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-  <button mat-button (click)="doFilter()">FILTER</button>
+  <div class="Component">
+    <mat-form-field>
+      <mat-select [(value)]="this.filter.Type" placeholder="Type">
+        <mat-option [value]=''></mat-option>
+        <mat-option *ngFor="let type of types" [value]="type">
+          {{type}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="Component">
+    <mat-form-field>
+      <mat-select [(value)]="this.filter.Category" placeholder="Category">
+        <mat-option [value]=''></mat-option>
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{category}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="Component Component_Button">
+    <button mat-flat-button color="primary" (click)="doFilter()">FILTER</button>
+  </div>
 </div>
 
 <!--Guzik dodania do listy produktów-->
@@ -39,7 +64,7 @@
 </button>
 
 <!--Tablica zawierająca rekordy z bazy danych-->
-<table mat-table [dataSource]="dataSource" matSort>
+<table mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc">
 
   <!--Każdy z containerów to jedna kolumna która wyświetla pojedyńczą zawartość encji-->
   <ng-container matColumnDef="id">
@@ -103,4 +128,4 @@
   <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
 </table>
 <!--Paginator z opcjami wielkości strony-->
-<mat-paginator [pageSizeOptions]="[5,10,25]" showFirstLastButtons></mat-paginator>
+<mat-paginator [pageSizeOptions]="[5,10,25]"  showFirstLastButtons></mat-paginator>

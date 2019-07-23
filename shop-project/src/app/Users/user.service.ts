@@ -13,5 +13,8 @@ export class UserService {
   public getCustomersList(): Observable<Customer[]> {
     return this.http.get<Customer[]>(this.baseUrl);
   }
+  public changeActivity(user: Customer): Observable<Customer> {
+    return this.http.put<Customer>(`${this.baseUrl}/changestate/${user.id}`, user);
+  }
 }
 

@@ -1,3 +1,42 @@
 table{
   width: 100%;
 }
+
+.filterContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.Component{
+  width: 33%;
+  display: flex;
+  justify-content: center;
+}
+
+.Component_Button{
+  position: relative;
+}
+
+.Component_Button button {
+  position: absolute;
+  top: 50%;
+  transform: translate(0,-50%);
+}
+
+.mat-table {
+  border: 1px solid #cfcfcf;
+  font-weight: bold;
+  height: 30vh !important;
+}
+
+th {
+  background-color: rgb(228, 228, 228);
+  font-weight: bold;
+  color: black;
+  font-size: 17px;
+}
+
+mat-icon{
+  color: #5aac2e;
+}

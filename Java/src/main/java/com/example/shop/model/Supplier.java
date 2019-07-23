@@ -31,11 +31,11 @@ public class Supplier {
 
     //Stworzenie adnotacji o kluczu obcym w innej tablicy
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "supplier")
-    private List<Product> products;
+    private Set<Product> products;
 
     public Supplier(){}
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(Set<Product> products) {
         this.products = products;
     }
 

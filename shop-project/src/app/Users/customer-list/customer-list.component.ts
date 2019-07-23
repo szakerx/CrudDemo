@@ -13,7 +13,7 @@ import {MatSort} from '@angular/material/sort';
 export class CustomerListComponent implements OnInit {
 
   customers: Customer[];
-  columnsToDisplay: string[] = ['id', 'firstname', 'lastname', 'edit', 'delete'];
+  columnsToDisplay: string[] = ['id', 'firstname', 'lastname', 'login', 'role', 'isactive', 'edit', 'delete'];
   dataSource: MatTableDataSource<Customer>;
 
 
@@ -39,5 +39,17 @@ export class CustomerListComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  changeState(user: Customer) {
+    if (user.active) {
+      user.active = false;
+    } else {
+      user.active = true;
+    }
+    this.customerService.changeActivity(user).subscribe(data => {
+      console.log(user.active)
+      this.reloadData();
+    });
   }
 }

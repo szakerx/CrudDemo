@@ -1,5 +1,9 @@
 package com.example.shop.model;
 
+import com.example.shop.model.Enums.Roles;
+import com.example.shop.model.ViewModels.UserVM;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,7 +14,7 @@ public class User {
 
     @Id
     @Column(name="id")
-    private int id;
+    private Long id;
 
     @Column(name="firstname")
     private String firstname;
@@ -24,19 +28,24 @@ public class User {
     @Column(name="pass")
     private String pass;
 
-    @Column(name="role")
-    private String role;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    @Type(type = "pgsql_enum")
+    private Roles role;
 
     @Column(name="active")
     private boolean isactive;
+
+
     public User(){}
-    public void setFirstname(String firstname){
-        this.firstname=firstname;
+
+    public void changeField(UserVM uvm) {
+        this.isactive = uvm.isActive();
     }
 
     //Gettery potrzebne do utworzenia json'a
-    public int getId() {
+    public Long getId() {
         return id;
     }
     public String getFirstname(){
@@ -49,8 +58,15 @@ public class User {
     public String getPass() {
         return pass;
     }
-    public String getRole() {
+    public Roles getRole() {
         return role;
     }
-    public boolean isIsactive() { return isactive; }
+    public String getStringRole() {
+        if(role==Roles.admin) {
+            return "admin";
+        } else {
+            return "worker";
+        }
+    }
+    public boolean isActive() { return isactive; }
 }

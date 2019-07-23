@@ -4,7 +4,6 @@ import {FormsModule} from '@angular/forms';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {CustomerDetailsComponent} from './Users/customer-details/customer-details.component';
 import {CustomerListComponent} from './Users/customer-list/customer-list.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MatListModule} from '@angular/material/list';
@@ -36,7 +35,6 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 @NgModule({
   declarations: [
     AppComponent,
-    CustomerDetailsComponent,
     CustomerListComponent,
     ProductTableComponent,
     LoginComponent,

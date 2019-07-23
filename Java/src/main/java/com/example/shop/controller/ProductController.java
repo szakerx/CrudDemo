@@ -50,6 +50,7 @@ public class ProductController {
         return _product;
     }
 
+
     @PutMapping("products/update/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<Product> updateProduct(@PathVariable("id") Long id,
@@ -62,6 +63,7 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
     @GetMapping("/products/enums/types")
     public String[] getTypes() {
         Type[] types = Type.values();
@@ -83,14 +85,14 @@ public class ProductController {
     }
 
     @PostMapping("/products/myquery")
-    public List<Product> myQuery(@RequestBody ProductFilter productFilter) {
-        productFilter.checkValues();
+    public List<Product> myQuery(@RequestBody ProductFilter pf) {
+        if(pf.isEmpty()){
+            System.out.println("PUSTO");
+            return getAllProducts();
+        }
         List<Product> products = new ArrayList<>();
-        Set<String> suppliers = new HashSet<>();
-        Set<String> countries = new HashSet<>();
-        suppliers.add(productFilter.getSupplier());
-        countries.add(productFilter.getCountry());
-        repository.findProductBySupplierNameAndCountry(productFilter.getSupplier(),productFilter.getCountry()).forEach(products::add);
+        pf.createEnums();
+        repository.productFilter(pf).forEach(products::add);
         return products;
     }
 }
