@@ -40,3 +40,12 @@ th {
 mat-icon{
   color: #5aac2e;
 }
+
+.ng-star-inserted{
+  text-align: center;
+}
+
+::ng-deep .mat-sort-header-container {
+  display:flex;
+  justify-content:center;
+}

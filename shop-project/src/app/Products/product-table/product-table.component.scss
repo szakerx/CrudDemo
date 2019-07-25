@@ -6,6 +6,7 @@ table{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .Component{
@@ -15,13 +16,13 @@ table{
 }
 
 .Component_Button{
-  position: relative;
+  align-items: center;
+  justify-content: center;
 }
 
 .Component_Button button {
-  position: absolute;
-  top: 50%;
-  transform: translate(0,-50%);
+  height: 50%;
+  margin: 3px;
 }
 
 .mat-table {
@@ -31,8 +32,18 @@ table{
 }
 
 th {
-  background-color: rgb(228, 228, 228);
+  background-color: rgb(211, 211, 211);
   font-weight: bold;
   color: black;
   font-size: 17px;
+  align-items: center;
+  justify-content: center;
+}
+
+tr:nth-child(even){
+  background: rgba(205, 201, 203, 0.61);
+}
+
+td {
+  text-align: center;
 }

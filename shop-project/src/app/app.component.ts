@@ -8,10 +8,15 @@ import {AuthService} from './Guards/auth.service';
 })
 export class AppComponent {
   title = 'shop-project';
+  myboolean = true;
   constructor(private authService: AuthService){
   }
   logoutClick() {
     this.authService.doLogoutUser();
     window.location.reload();
+  }
+
+  changeBool() {
+    this.myboolean = !this.myboolean;
   }
 }

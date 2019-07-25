@@ -31,6 +31,9 @@ import {A11yModule} from '@angular/cdk/a11y';
 import {ProductWindowComponent} from './Products/product-window/product-window.component';
 import {MatSelectModule} from '@angular/material/select';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { UserWindowComponent } from './Users/user-window/user-window.component';
+import { NewUserWindowComponent } from './Users/new-user-window/new-user-window.component';
+import { ChangePasswordComponentComponent } from './Users/change-password-component/change-password-component.component';
 
 @NgModule({
   declarations: [
@@ -39,11 +42,17 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     ProductTableComponent,
     LoginComponent,
     ProductWindowComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    UserWindowComponent,
+    NewUserWindowComponent,
+    ChangePasswordComponentComponent,
   ],
   entryComponents: [
     ProductWindowComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    UserWindowComponent,
+    NewUserWindowComponent,
+    ChangePasswordComponentComponent
   ],
   imports: [
     BrowserModule,

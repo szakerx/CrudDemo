@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>{{user.firstname}} {{user.lastname}}</h1>
+<div mat-dialog-content>
+  <div class="row">
+    <div class="column">
+
+      <p>Firstname</p>
+      <mat-form-field>
+        <input matInput [(ngModel)]="this.user.firstname">
+      </mat-form-field>
+
+      <p>Login</p>
+      <mat-form-field>
+        <input matInput [(ngModel)]="this.user.login">
+      </mat-form-field>
+
+    </div>
+    <div class="column">
+
+      <p>Lastname</p>
+      <mat-form-field>
+        <input matInput [(ngModel)]="this.user.lastname"/>
+      </mat-form-field>
+
+      <p>Role</p>
+      <mat-form-field>
+        <mat-select [(value)]="this.user.role">
+          <mat-option *ngFor="let role of roles" [value]="role">
+            {{role}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancelClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="this.user">OK</button>
+</div>
+

@@ -5,6 +5,7 @@ import com.example.shop.model.Enums.Category;
 import com.example.shop.model.Product;
 import com.example.shop.repo.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,7 @@ public class ProductController {
     @GetMapping("/products")
     public List<Product> getAllProducts(){
         List<Product> products = new ArrayList<>();
-        repository.findAll().forEach(products::add);
+        repository.findAll(Sort.by(Sort.Direction.ASC,"id")).forEach(products::add);
         return products;
     }
 

@@ -1,9 +1,11 @@
 package com.example.shop.controller;
 
+import com.example.shop.model.Enums.Roles;
 import com.example.shop.model.User;
 import com.example.shop.model.ViewModels.UserVM;
 import com.example.shop.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +32,7 @@ public class UserController {
     //Wybierz z bazy wszystkich userów
     @GetMapping("/users")
     public List<UserVM> getAllUsers() {
-        List<User> users = repository.findAll();
+        List<User> users = repository.findAll(Sort.by(Sort.Direction.ASC,"id"));
         List<UserVM> usersVms = new ArrayList<>();
         users.forEach(data ->
             usersVms.add(new UserVM(data)));
@@ -39,9 +41,8 @@ public class UserController {
 
     @PutMapping("/users/changestate/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity<User> changeactive(@PathVariable("id") Long id,
+    public ResponseEntity<User> changeActive(@PathVariable("id") Long id,
                                                @RequestBody UserVM user) {
-        System.out.println(user.isActive());
         Optional<User> _user = repository.findById(id);
         if(_user.isPresent()) {
             User saveMe = _user.get();
@@ -52,17 +53,55 @@ public class UserController {
         }
     }
 
-
-    @PostMapping(value = "/users/create")
-    public User addUser(@RequestBody User user){
-        User _user = repository.save(user);
-        return _user;
+    @PutMapping("users/update/{id}")
+    public ResponseEntity<User> updateProduct(@PathVariable("id") Long id,
+                                                 @RequestBody UserVM user) {
+        Optional<User> _user = repository.findById(id);
+        if(_user.isPresent()) {
+            User saveMe = _user.get();
+            saveMe.update(user);
+            return new ResponseEntity<>(repository.save(saveMe),HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-//    @DeleteMapping("/users/{id}")
-//    public ResponseEntity<String> deleteUser(@PathVariable("id")long id){
-//        System.out.println("Delete User with ID = "+id);
-//        repository.deleteById(id);
-//        return new ResponseEntity<>("User has been deleted!", HttpStatus.OK);
-//    }
+    @PutMapping("users/changepassword/{id}")
+    public ResponseEntity<String> changePassword(@PathVariable("id") Long id,
+                                                 @RequestBody String password) {
+        Optional<User> _user = repository.findById(id);
+        if(_user.isPresent()) {
+            User saveMe = _user.get();
+            saveMe.setPass(password);
+            repository.save(saveMe);
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/users/add")
+    public ResponseEntity<User> addUser(@RequestBody User user){
+        if(user.canBeAdded()) {
+            return new ResponseEntity<>(repository.save(user),HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/users/roles")
+    public String[] getRoles() {
+        Roles[] types = Roles.values();
+        String[] names = new String[types.length];
+        for (int i = 0; i < types.length; i++) {
+            names[i] = types[i].name();
+        }
+        return names;
+    }
+
+    @DeleteMapping("/users/delete/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable("id")long id){
+        repository.deleteById(id);
+        return new ResponseEntity<>("User has been deleted!", HttpStatus.OK);
+    }
 }

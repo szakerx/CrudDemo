@@ -14,6 +14,7 @@ public class User {
 
     @Id
     @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name="firstname")
@@ -35,16 +36,17 @@ public class User {
     private Roles role;
 
     @Column(name="active")
-    private boolean isactive;
+    private boolean active;
 
 
     public User(){}
 
     public void changeField(UserVM uvm) {
-        this.isactive = uvm.isActive();
+        this.active = uvm.isActive();
     }
 
     //Gettery potrzebne do utworzenia json'a
+
     public Long getId() {
         return id;
     }
@@ -68,5 +70,24 @@ public class User {
             return "worker";
         }
     }
-    public boolean isActive() { return isactive; }
+    public boolean isActive() { return active; }
+
+    public void update(UserVM user) {
+        this.firstname = user.getFirstname();
+        this.lastname = user.getLastname();
+        this.login = user.getLogin();
+        this.role = user.getRole();
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    public boolean canBeAdded() {
+        if(firstname.equals("") || lastname.equals("") || login.equals("") || pass.equals("") && (role.equals(Roles.worker) || role.equals(Roles.admin))) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

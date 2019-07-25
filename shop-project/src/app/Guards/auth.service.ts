@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError, map, mapTo, tap} from 'rxjs/operators';
 import {Token} from './Token';
@@ -25,7 +25,9 @@ export class AuthService {
         }),
         mapTo(true),
         catchError(error => {
-          alert(error.message);
+          if (error instanceof HttpErrorResponse && error.status === 401) {
+            alert('Niepoprawne dane logowania');
+          }
           return of(false);
         }));
   }

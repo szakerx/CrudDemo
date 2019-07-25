@@ -10,7 +10,7 @@
 
       <p>Count</p>
       <mat-form-field>
-        <input matInput type="number" [(ngModel)]="this.product.count">
+        <input matInput type="number" min="0" [(ngModel)]="this.product.count">
       </mat-form-field>
 
       <p>Supplier</p>
@@ -47,7 +47,6 @@
       <mat-form-field>
         <input matInput [(ngModel)]="this.product.country">
       </mat-form-field>
-
 
     </div>
   </div>

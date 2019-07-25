@@ -70,7 +70,6 @@ export class ProductTableComponent implements OnInit {
     dialogRef.afterClosed().subscribe(product => {
       if (product) {
         this.productService.updateProduct(product).subscribe(data => {
-          console.log('After closed second subscribe: ' + data);
           this.reloadData();
         });
       }
@@ -84,18 +83,20 @@ export class ProductTableComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(product => {
-      product.id = -1;
-      this.productService.addProduct(product).subscribe(data => {
-        console.log(data);
-        this.reloadData();
-      });
+      if (product) {
+        product.id = -1;
+        this.productService.addProduct(product).subscribe(data => {
+          console.log(data);
+          this.reloadData();
+        });
+      }
     });
   }
 
   deleteButtonClick(index: number) {
     const dialogConfirm = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
-      data: this.products[index]
+      data: this.products[index].name
     });
 
     dialogConfirm.afterClosed().subscribe(confirm => {

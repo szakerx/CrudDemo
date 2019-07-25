@@ -1,0 +1,59 @@
+<h1 mat-dialog-title>New User</h1>
+
+<div mat-dialog-content>
+  <div class="row">
+    <div class="column">
+
+      <p>Firstname</p>
+      <mat-form-field>
+        <input matInput tabindex="1" [(ngModel)]="this.user.firstname">
+      </mat-form-field>
+
+      <p>Login</p>
+      <mat-form-field>
+        <input matInput tabindex="3" [(ngModel)]="this.user.login">
+      </mat-form-field>
+
+      <p>Is active</p>
+      <mat-form-field>
+        <mat-select [(value)]="this.user.active" tabindex="5">
+          <mat-option value="true">Yes</mat-option>
+          <mat-option value="false">No</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+    <div class="column">
+
+      <p>Lastname</p>
+      <mat-form-field>
+        <input matInput tabindex="2" [(ngModel)]="this.user.lastname"/>
+      </mat-form-field>
+
+      <p>Password</p>
+      <mat-form-field >
+        <input matInput tabindex="4" type="password" [(ngModel)]="this.user.pass"/>
+      </mat-form-field>
+
+      <p>Role</p>
+      <mat-form-field>
+        <mat-select tabindex="6" [(value)]="this.user.role">
+          <mat-option *ngFor="let role of roles" [value]="role">
+            {{role}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+  </div>
+</div>
+<div *ngIf="isUnvalid">
+  <span>
+    You have to fill all fields!
+  </span>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancelClick()">Cancel</button>
+  <button mat-button (click)="returnUser()">OK</button>
+</div>
+

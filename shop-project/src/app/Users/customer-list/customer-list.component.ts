@@ -1,9 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from '../user.service';
 import {Customer} from '../customer';
-import {MatTableDataSource} from '@angular/material';
+import {MatDialog, MatTableDataSource} from '@angular/material';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
+import {UserWindowComponent} from '../user-window/user-window.component';
+import {ConfirmDialogComponent} from '../../confirm-dialog/confirm-dialog.component';
+import {NewUserWindowComponent} from '../new-user-window/new-user-window.component';
+import {ChangePasswordComponentComponent} from '../change-password-component/change-password-component.component';
 
 @Component({
   selector: 'customer-list',
@@ -13,11 +17,11 @@ import {MatSort} from '@angular/material/sort';
 export class CustomerListComponent implements OnInit {
 
   customers: Customer[];
-  columnsToDisplay: string[] = ['id', 'firstname', 'lastname', 'login', 'role', 'isactive', 'edit', 'delete'];
+  columnsToDisplay: string[] = ['id', 'firstname', 'lastname', 'login', 'role', 'isactive', 'changepass', 'edit', 'delete'];
   dataSource: MatTableDataSource<Customer>;
 
 
-  constructor(private customerService: UserService) {
+  constructor(private customerService: UserService, private dialog: MatDialog) {
   }
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -47,9 +51,67 @@ export class CustomerListComponent implements OnInit {
     } else {
       user.active = true;
     }
-    this.customerService.changeActivity(user).subscribe(data => {
-      console.log(user.active)
+    this.customerService.changeActivity(user).subscribe(() => {
       this.reloadData();
+    });
+  }
+
+  editButtonClick(user: Customer) {
+    const dialogRef = this.dialog.open(UserWindowComponent, {
+      width: '800px',
+      data: user
+    });
+
+    dialogRef.afterClosed().subscribe(backUser => {
+      if (backUser) {
+        this.customerService.updateUser(backUser).subscribe(() => {
+          this.reloadData();
+        });
+      }
+    });
+  }
+
+  deleteButtonClick(user: Customer) {
+    const dialogConfirm = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: user.firstname
+    });
+
+    dialogConfirm.afterClosed().subscribe(confirm => {
+      if (confirm) {
+        this.customerService.deleteUser(user).subscribe(info => {
+          this.reloadData();
+        });
+      }
+    });
+  }
+
+  addButtonClick() {
+    const dialogRef = this.dialog.open(NewUserWindowComponent, {
+      width: '450px',
+      data: new Customer()
+    });
+
+    dialogRef.afterClosed().subscribe(backUser => {
+      if (backUser) {
+        this.customerService.addUser(backUser).subscribe(() => {
+          this.reloadData();
+        });
+      }
+    });
+  }
+
+  changePassword(user: Customer) {
+    const dialogRef = this.dialog.open(ChangePasswordComponentComponent, {
+      width: '450px',
+    });
+
+    dialogRef.afterClosed().subscribe(data => {
+      if (data) {
+        this.customerService.changePassword(user.id, data).subscribe(() => {
+          console.log('changed');
+        });
+      }
     });
   }
 }

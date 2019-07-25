@@ -40,16 +40,4 @@ export class LoginComponent implements OnInit {
         }
       });
   }
-
-  // login() {
-  //   this.authService.login(
-  //     {
-  //       username: this.f.username.value,
-  //       password: this.f.password.value
-  //     }
-  //   ).subscribe((data => {
-  //     console.log(data);
-  //   }));
-  // }
-
 }

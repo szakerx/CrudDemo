@@ -18,9 +18,6 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import java.util.Arrays;
 
 
-//Klasa odpowiedzialna za ustawienia ochrony, jest w budowie, skończyłem na 18 odcinku
-
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -35,7 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //Będzie przerobione na pobieranie z bazy danych, lista autoryzowanych użytkowników
+        //Pobieranie z bazy danych, lista autoryzowanych użytkowników
         auth.authenticationProvider(authenticationProvider());
     }
 
@@ -54,8 +51,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 // zasady
                 .antMatchers("/login").permitAll()
-                .antMatchers("/products").authenticated()
-                .antMatchers("/users").hasRole("admin");
+                .antMatchers("/products/delete/**").hasRole("admin")
+                .antMatchers("/products/**").authenticated()
+                .antMatchers("/users/**").hasRole("admin");
     }
 
     @Bean
@@ -76,7 +74,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     // z tego beana domyślnie korzysta cors
     CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200","http://locaclhost"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);

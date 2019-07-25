@@ -1,8 +1,12 @@
-<h1 mat-dialog-title>Customers</h1>
-<br>
-<mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-</mat-form-field>
+<div style="display: flex; flex-direction: row; align-items: center; margin: 2px;">
+  <mat-form-field appearance="outline">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+
+  <button mat-icon-button (click)="addButtonClick()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
 
 <!--Tak samo jak w producttable-->
 <table mat-table [dataSource]="dataSource" matSort>
@@ -35,12 +39,12 @@
   <ng-container matColumnDef="isactive">
     <th mat-header-cell *matHeaderCellDef>Is Active</th>
     <td mat-cell *matCellDef="let user">
-      <ng-template #niedziala>
+      <ng-template #unactive>
         <button (click)="changeState(customers[dataSource.data.indexOf(user)])" mat-icon-button>
           <mat-icon color="warn">indeterminate_check_box</mat-icon>
         </button>
       </ng-template>
-      <div *ngIf="user.active; else niedziala">
+      <div *ngIf="user.active; else unactive">
         <button mat-icon-button (click)="changeState(customers[dataSource.data.indexOf(user)])">
           <mat-icon>check_box</mat-icon>
         </button>
@@ -48,25 +52,34 @@
     </td>
   </ng-container>
 
+  <ng-container matColumnDef="changepass">
+    <th mat-header-cell *matHeaderCellDef>Change password</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button (click)="changePassword(customers[dataSource.data.indexOf(element)])">
+        <mat-icon>vpn_key</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
   <ng-container matColumnDef="edit">
     <th mat-header-cell *matHeaderCellDef>Edit</th>
     <td mat-cell *matCellDef="let element">
-        <button mat-icon-button>
-          <mat-icon color="primary">edit</mat-icon>
-        </button>
+      <button mat-icon-button (click)="editButtonClick(customers[dataSource.data.indexOf(element)])">
+        <mat-icon color="primary">edit</mat-icon>
+      </button>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="delete">
     <th mat-header-cell *matHeaderCellDef>Delete</th>
     <td mat-cell *matCellDef="let element">
-      <button mat-icon-button>
+      <button mat-icon-button (click)="deleteButtonClick(customers[dataSource.data.indexOf(element)])">
         <mat-icon color="warn">delete</mat-icon>
       </button>
     </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay" class="justify-center"></tr>
   <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
 
 </table>

@@ -1,5 +1,3 @@
-<h1 mat-dialog-title>Products</h1>
-
 <!-- FILTROWANIE -->
 <div class="filterContainer">
 
@@ -55,16 +53,15 @@
 
   <div class="Component Component_Button">
     <button mat-flat-button color="primary" (click)="doFilter()">FILTER</button>
+    <button mat-flat-button (click)="addButtonClick()">ADD</button>
   </div>
 </div>
 
 <!--Guzik dodania do listy produktów-->
-<button mat-icon-button (click)="addButtonClick()">
-  <mat-icon>add</mat-icon>
-</button>
+
 
 <!--Tablica zawierająca rekordy z bazy danych-->
-<table mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc">
+<table mat-table [dataSource]="dataSource" matSort>
 
   <!--Każdy z containerów to jedna kolumna która wyświetla pojedyńczą zawartość encji-->
   <ng-container matColumnDef="id">

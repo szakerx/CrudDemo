@@ -1,7 +1,7 @@
 export class Customer {
-  constructor(public id: number = 0, public firstname: string = 'def',
-              public lastname: string = 'def', public login: string = '0',
-              public role: string = 'def', public active: boolean = false) {
+  constructor(public id: number = 0, public firstname: string = '',
+              public lastname: string = '', public login: string = '',
+              public role: string = '', public active: boolean = false) {
     this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;

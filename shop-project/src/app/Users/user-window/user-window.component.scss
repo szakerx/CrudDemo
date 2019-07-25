@@ -1,0 +1,14 @@
+.column {
+  float: left;
+  width: 50%;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.makemegray{
+  background: #a6a6a6;
+}
