@@ -12,9 +12,9 @@ import {SupplierService} from '../../Suppliers/supplier.service';
 })
 export class ProductWindowComponent implements OnInit {
 
-  private types: string[];
-  private categories: string[];
-  private suppliers: Supplier[];
+  public types: string[];
+  public categories: string[];
+  public suppliers: Supplier[];
 
   constructor(public dialogRef: MatDialogRef<ProductWindowComponent>,
               @Inject(MAT_DIALOG_DATA) public product: Product,

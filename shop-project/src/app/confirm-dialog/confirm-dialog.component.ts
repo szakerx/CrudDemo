@@ -10,7 +10,7 @@ import {Product} from '../Products/product';
 export class ConfirmDialogComponent /*implements OnInit*/ {
 
   constructor(public dialogRef: MatDialogRef<ConfirmDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) private name: string) {
+              @Inject(MAT_DIALOG_DATA) public name: string) {
 
   }
 

@@ -8,11 +8,11 @@ import {MatDialogRef} from '@angular/material';
 })
 export class ChangePasswordComponentComponent implements OnInit {
 
-  private password: string;
-  private repeat: string;
-  private isValid: boolean;
+  public password: string;
+  public repeat: string;
+  public isValid: boolean;
 
-  constructor(private dialog: MatDialogRef<ChangePasswordComponentComponent>) {
+  constructor(public dialog: MatDialogRef<ChangePasswordComponentComponent>) {
   }
 
   ngOnInit() {

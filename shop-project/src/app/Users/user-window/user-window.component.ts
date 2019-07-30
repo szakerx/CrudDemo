@@ -13,7 +13,7 @@ export class UserWindowComponent implements OnInit {
   roles: string[];
 
   constructor(private dialogRef: MatDialogRef<UserWindowComponent>,
-              @Inject (MAT_DIALOG_DATA) private user: Customer,
+              @Inject (MAT_DIALOG_DATA) public user: Customer,
               private userService: UserService) { }
 
   ngOnInit() {

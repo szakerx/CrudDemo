@@ -37,8 +37,8 @@ export class ProductTableComponent implements OnInit {
   categories: string[];
 
   // Wstrzyknięcie serwisu produktów do pobrania ich z bazy oraz dialogu aby edytować rekordy (jeszcze nie działa)
-  constructor(private productService: ProductsService, public dialog: MatDialog,
-              private authService: AuthService, private supplierService: SupplierService) {
+  constructor(public productService: ProductsService, public dialog: MatDialog,
+              public authService: AuthService, public supplierService: SupplierService) {
   }
 
   ngOnInit() {

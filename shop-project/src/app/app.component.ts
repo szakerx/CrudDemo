@@ -9,7 +9,7 @@ import {AuthService} from './Guards/auth.service';
 export class AppComponent {
   title = 'shop-project';
   myboolean = true;
-  constructor(private authService: AuthService){
+  constructor(public authService: AuthService){
   }
   logoutClick() {
     this.authService.doLogoutUser();

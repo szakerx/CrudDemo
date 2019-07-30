@@ -28,7 +28,7 @@ export class NewUserWindowComponent implements OnInit {
   constructor(private userService: UserService, private dialog: MatDialogRef<NewUserWindowComponent>) {
   }
 
-  private user: User;
+  public user: User;
   roles: string[];
   isUnvalid = false;
 
