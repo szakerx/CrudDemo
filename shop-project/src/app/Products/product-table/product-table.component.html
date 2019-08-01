@@ -10,7 +10,7 @@
   <div class="Component">
     <mat-form-field>
       <mat-select [(value)]="this.filter.Supplier" placeholder="Supplier">
-        <mat-option [value]=''></mat-option>
+        <mat-option [value]=""></mat-option>
         <mat-option *ngFor="let supplier of suppliers" [value]="supplier.name">
           {{supplier.name}}
         </mat-option>
@@ -21,7 +21,7 @@
   <div class="Component">
     <mat-form-field>
       <mat-select [(value)]="this.filter.Country" placeholder="Country">
-        <mat-option [value]=''></mat-option>
+        <mat-option [value]=""></mat-option>
         <mat-option *ngFor="let country of countries" [value]="country">
           {{country}}
         </mat-option>
@@ -32,7 +32,7 @@
   <div class="Component">
     <mat-form-field>
       <mat-select [(value)]="this.filter.Type" placeholder="Type">
-        <mat-option [value]=''></mat-option>
+        <mat-option [value]=""></mat-option>
         <mat-option *ngFor="let type of types" [value]="type">
           {{type}}
         </mat-option>
@@ -43,7 +43,7 @@
   <div class="Component">
     <mat-form-field>
       <mat-select [(value)]="this.filter.Category" placeholder="Category">
-        <mat-option [value]=''></mat-option>
+        <mat-option [value]=""></mat-option>
         <mat-option *ngFor="let category of categories" [value]="category">
           {{category}}
         </mat-option>

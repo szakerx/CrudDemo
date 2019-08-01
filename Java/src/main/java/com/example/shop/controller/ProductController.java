@@ -88,7 +88,6 @@ public class ProductController {
     @PostMapping("/products/myquery")
     public List<Product> myQuery(@RequestBody ProductFilter pf) {
         if(pf.isEmpty()){
-            System.out.println("PUSTO");
             return getAllProducts();
         }
         List<Product> products = new ArrayList<>();

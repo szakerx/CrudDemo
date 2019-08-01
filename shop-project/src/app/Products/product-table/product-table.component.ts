@@ -31,6 +31,7 @@ export class ProductTableComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
+  emptyString = '';
   suppliers: Supplier[];
   countries: string[];
   types: string[];
@@ -128,6 +129,7 @@ export class ProductTableComponent implements OnInit {
   }
 
   doFilter() {
+    this.filter.checkValues();
     this.productService.filterProducts(this.filter).subscribe(data => {
       this.products = data;
       this.dataSource = new MatTableDataSource<Product>(this.products);

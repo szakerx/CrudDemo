@@ -35,4 +35,18 @@ export class ProductFilter {
   public set Category(value: string) {
     this.category = value;
   }
+  public checkValues() {
+    if (!this.category) {
+      this.category = '';
+    }
+    if (!this.supplier) {
+      this.supplier = '';
+    }
+    if (!this.type) {
+      this.type = '';
+    }
+    if (!this.country) {
+      this.country = '';
+    }
+  }
 }
