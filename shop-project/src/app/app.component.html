@@ -5,11 +5,11 @@
       <span style="width: 18%;"> NAV </span>
 
       <span style="width: 18%;" *ngIf="this.authService.isLoggedIn()">
-        <a mat-flat-button (click)="changeBool()" [ngStyle]="myboolean && {'border':'1px solid white'}" color="primary" [routerLink]="'products'" routerLinkActive="true">PRODUCTS</a>
+        <a (click)="changeEnum('products')" mat-flat-button [ngStyle]="this.page==0  && {'border':'1px solid white'}" color="primary" [routerLink]="'products'" routerLinkActive="true">PRODUCTS</a>
       </span>
 
       <span style="width: 18%;" *ngIf="this.authService.isLoggedIn() && this.authService.getRole()=='admin'">
-        <a mat-flat-button (click)="changeBool()" [ngStyle]="!myboolean && {'border':'1px solid white'}" color="primary" [routerLink]="'users'" routerLinkActive="true">USERS</a>
+        <a mat-flat-button (click)="changeEnum('users')" [ngStyle]="this.page==1 && {'border':'1px solid white'}" color="primary" [routerLink]="'users'" routerLinkActive="true">USERS</a>
       </span>
 
       <span style="width: 18%; display: none" *ngIf="this.authService.isLoggedIn()">

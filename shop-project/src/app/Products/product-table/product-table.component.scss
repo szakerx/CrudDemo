@@ -6,7 +6,6 @@ table{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
 }
 
 .Component{
@@ -16,13 +15,13 @@ table{
 }
 
 .Component_Button{
-  align-items: center;
-  justify-content: center;
+  position: relative;
 }
 
 .Component_Button button {
-  height: 50%;
-  margin: 3px;
+  position: absolute;
+  top: 50%;
+  transform: translate(0,-50%);
 }
 
 .mat-table {
@@ -32,18 +31,21 @@ table{
 }
 
 th {
-  background-color: rgb(211, 211, 211);
+  background-color: rgb(228, 228, 228);
   font-weight: bold;
   color: black;
   font-size: 17px;
-  align-items: center;
-  justify-content: center;
 }
 
-tr:nth-child(even){
-  background: rgba(205, 201, 203, 0.61);
+mat-icon{
+  color: #5aac2e;
 }
 
-td {
+.ng-star-inserted{
   text-align: center;
+}
+
+::ng-deep .mat-sort-header-container {
+  display:flex;
+  justify-content:center;
 }

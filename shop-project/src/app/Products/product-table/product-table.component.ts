@@ -22,7 +22,7 @@ export class ProductTableComponent implements OnInit {
   // Lista produktów
   products: Product[];
   // Lista kolumn które ma wyświetlić mat-table
-  columnsToDisplay = ['id', 'name', 'type', 'count', 'category', 'supplier', 'country', 'edit', 'delete'];
+  columnsToDisplay = ['id', 'name', 'type', 'count', 'category', 'supplier.name', 'country', 'edit', 'delete'];
   // źródło danych mat-table
   dataSource: MatTableDataSource<Product>;
   filter: ProductFilter = new ProductFilter();
@@ -52,6 +52,12 @@ export class ProductTableComponent implements OnInit {
     this.productService.getAllProducts().subscribe(data => {
       this.products = data;
       this.dataSource = new MatTableDataSource<Product>(this.products);
+      this.dataSource.sortingDataAccessor = (item, property) => {
+        switch (property) {
+          case 'supplier.name': return item.supplier.name;
+          default: return item[property];
+        }
+      };
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });

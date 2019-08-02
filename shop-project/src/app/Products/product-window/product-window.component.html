@@ -52,6 +52,6 @@
   </div>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="cancelClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="this.product"  >OK</button>
+  <button mat-raised-button (click)="cancelClick()" color="warn">Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="this.product" color="primary">OK</button>
 </div>
